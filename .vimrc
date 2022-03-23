@@ -23,7 +23,7 @@ set fencs=ucs-bom,utf-8,cp949,euc-kr,latin1
 "endif
 
 "etc
-set nocompatible    " 오리지날 VI와 호환하지 않음
+set nocompatible    "오리지날 VI와 호환하지 않음
 set nu
 set novisualbell    "화면 깜빡임 끔
 set nuw=4           "줄 번호 표시 너비 설정
@@ -34,7 +34,7 @@ set noet
 "set et             "tab 대신 sts에 설정한 값만큼 스페이스 입력
 set sts=8           "et가 설정되어 있으면 tab 대신 지정한 수의 스페이스 입력
 set smarttab        "sw, ts sts를 참조하여 탭과 백스페이스 키 동작 보조
-set ts=8            "탭을 몇 개의 스페이스로 표시할지 설정
+set ts=8            "탭을 몇 개의 스페이스로 표시할지 설정. :retab을 입력하면 파일 내의 탭을 tabstop 만큼의 스페이스로 바꿔준다.
 set sw=8            "정렬과 인뎅팅시 사용할 스페이스
 set ai
 set si
@@ -54,8 +54,10 @@ set ttymouse=xterm2 "마우스스크롤
 set noeol           "파일 맨 끝의(EOL) 개행문자 제거하기
 "set cuc            "커서가 있는 곳을 세로로 하이라이트
 set cul             "커서가 있은 곳을 가로로 하이라이트
-set bs=indent,eol,start
-
+set bs=indent,eol,start  "indent : 오토 인덴트를 지울 수 있다. 가령 인덴팅에 4개의 스페이스를 사용하고 있다면, 백 스페이스를 한 번 눌러서 인덴팅의 스페이스 4개를 지울 수 있다.
+                         "eol : end of line을 지워서, 두 줄을 하나로 합칠 수 있다.
+                         "start : 행의 시작 지점을 지울 수 있다.
+                         "eol과 start를 함께 설정하면 백 스페이스로 이번 줄을 다 지우고 나서, 더 누르면 바로 윗줄 제일 오른쪽 글자부터 지우기 시작한다.
 "map
 nnoremap j gj
 nnoremap k gk
@@ -65,10 +67,9 @@ map <F11> :<C-u>call CopyWord()<CR> :vnew <C-r>".diff \| .!git show <C-r>"<CR>
 "vmap <C-K> :norm 0xx<CR>
 
 highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+match ExtraWhitespace /\s\+$/  "라인 마지막 공백 붉은색 표시
 
-" highlight DoubleClick
-nmap <2-LeftMouse> *#
+nmap <2-LeftMouse> *#  "highlight DoubleClick
 
 func CopyWord()
         let column = getline('.')[col('.')]
