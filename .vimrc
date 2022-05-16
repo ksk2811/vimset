@@ -23,6 +23,7 @@ set fencs=ucs-bom,utf-8,cp949,euc-kr,latin1
 "endif
 
 "etc
+set title           "타이틀바에 현재 편집중인 파일을 표시
 set nocompatible    "오리지날 VI와 호환하지 않음
 set nu
 set novisualbell    "경고용 화면 깜빡임 끔
