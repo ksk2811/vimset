@@ -25,9 +25,9 @@ set fencs=ucs-bom,utf-8,cp949,euc-kr,latin1
 "etc
 set nocompatible    "오리지날 VI와 호환하지 않음
 set nu
-set novisualbell    "화면 깜빡임 끔
+set novisualbell    "경고용 화면 깜빡임 끔
 set nuw=4           "줄 번호 표시 너비 설정
-set wmnu            "탭완성시 자동완성목록보여줌
+set wmnu            "탭 완성시 자동완성 목록 보여줌
 set splitbelow
 set splitright
 set noet
@@ -35,12 +35,12 @@ set noet
 set sts=8           "et가 설정되어 있으면 tab 대신 지정한 수의 스페이스 입력
 set smarttab        "sw, ts sts를 참조하여 탭과 백스페이스 키 동작 보조
 set ts=8            "탭을 몇 개의 스페이스로 표시할지 설정. :retab을 입력하면 파일 내의 탭을 tabstop 만큼의 스페이스로 바꿔준다.
-set sw=8            "정렬과 인뎅팅시 사용할 스페이스
+set sw=8            "정렬과 인덴팅시 사용할 스페이스
 set ai
 set si
 "set cindent
 set nostartofline   "밑줄로 이동할 때 커서가 가장 왼쪽의 시작점으로 이동하지 못하게 한다
-set laststatus=2    "하단상태바출력(0: 표시X, 1: 창이 두개 이상일때 표시, 2: 항상표시)
+set laststatus=2    "하단 상태바출력(0: 표시X, 1: 창이 두개 이상일때 표시, 2: 항상표시)
 set hlsearch
 "set incsearch      "찾는글자칠때마다 찾은글자표시
 set ic              "대소문자 무시
