@@ -62,7 +62,7 @@ set bs=indent,eol,start  "indent : 오토 인덴트를 지울 수 있다. 가령
 "map
 nnoremap j gj
 nnoremap k gk
-nmap <F10> ma:%!git blame %<CR>
+nmap <F10> ma:%!git blame %<CR>`a
 map <F11> :<C-u>call CopyWord()<CR> :vnew <C-r>".diff \| .!git show <C-r>"<CR>
 "vmap <C-J> :norm i//<CR>   "블럭잡힌 각 라인에 // 주석추가
 "vmap <C-K> :norm 0xx<CR>
