@@ -62,6 +62,8 @@ set bs=indent,eol,start  "indent : 오토 인덴트를 지울 수 있다. 가령
 "map
 nnoremap j gj
 nnoremap k gk
+nmap <F5> :PlugInstall<CR>
+nmap <F6> :VimGameCodeBreak<CR>
 nmap <F10> ma:%!git blame %<CR>`a
 map <F11> :<C-u>call CopyWord()<CR> :vnew <C-r>".diff \| .!git show <C-r>"<CR>
 "vmap <C-J> :norm i//<CR>   "블럭잡힌 각 라인에 // 주석추가
@@ -81,3 +83,23 @@ func CopyWord()
         endif
         normal evBy 
 endfunc
+
+" Specify a directory for plugins
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+let curl_exists=expand('curl')
+if !filereadable(vimplug_exists)
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+
+  autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin('~/.vim/autoload')
+Plug 'johngrib/vim-game-code-break'
+call plug#end()
