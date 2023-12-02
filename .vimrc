@@ -33,10 +33,10 @@ set splitbelow
 set splitright
 set noet
 "set et             "tab 대신 sts에 설정한 값만큼 스페이스 입력
-set sts=8           "et가 설정되어 있으면 tab 대신 지정한 수의 스페이스 입력
+"set sts=8          "et가 설정되어 있으면 tab 대신 지정한 수의 스페이스 입력
+set ts=8            "직접 탭 입력 시 몇 개의 스페이스로 표시할지 설정. :retab을 입력하면 파일 내의 탭을 tabstop 만큼의 스페이스로 바꿔준다.
+set sw=8            "정렬과 인덴팅시 사용하는 탭을 몇 개의 스페이스로 표시할지 설정
 set smarttab        "sw, ts sts를 참조하여 탭과 백스페이스 키 동작 보조
-set ts=8            "탭을 몇 개의 스페이스로 표시할지 설정. :retab을 입력하면 파일 내의 탭을 tabstop 만큼의 스페이스로 바꿔준다.
-set sw=8            "정렬과 인덴팅시 사용할 스페이스
 set ai
 set si
 "set cindent
