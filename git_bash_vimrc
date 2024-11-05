@@ -1,0 +1,97 @@
+syntax on
+filetype on
+set t_CO=256
+color slate
+
+let &t_SI = "\<ESC>[6 q"
+let &t_EI = "\<ESC>[2 q"
+
+set fencs=utf-8,euc-kr,Shift-JIS"파일 열때 감지할 인코딩 순서, 바이트가 큰것 부터 지정해야 한다
+"set fencs=euc-kr  "파일 열 때 감지할 인코딩 순서, 바이트가 큰것 부터 지정해야 한다
+"set fenc=utf-8    "파일 열 때 fencs에서 사용된 인코딩이 적용되며 저장될 때 사용, 또는 새 파일 생성시
+"set enc=utf-8     "시스템 혹은 터미널 인코딩 Vim의 메시지, 메뉴, 상태 표시줄, 그리고 클립보드에서 사용되는 인코딩을 결정
+
+set fileformats=dos,unix
+
+"set scb
+"set cuc           "커서가 있는 곳을 세로로 하이라이트
+set cursorline    "커서 있는 행에 라인 표시
+set novisualbell  "경고용 화면 깜빡임 끔
+set nu            "라인번호 표시
+set nuw=4         "라인번호 폭
+set ts=2          "탭을 몇 개의 스페이스로 표시할지 설정. :retab을 입력하면 파일 내의 탭을 tabstop 만큼의 스페이스로 바꿔준다.
+set sw=2          "정렬과 인덴팅시 사용할 스페이스 (<, >, =)
+"set sts=2        "텍스트 마지막에 탭입력시 입력될 스페이스, ts와는 다르다
+set title         "타이틀에 현재 파일명표시
+set wmnu          "탭 완성시 자동완성 목록 보이기
+"set splitbelow    "화면 분할시 상[하] 우선
+set splitright
+set noet
+"set et            "tab을space로입력
+set smarttab      "sw, ts sts를 참조하여 백스페이스 키 동작 보조
+set cindent       "c 스타일로 인덴트 작성
+set ai            "auto
+set si            "smart
+set nostartofline "밑줄로 이동할 때 커서가 가장 왼쪽의 시작점으로 이동하지 못하게 한다
+set laststatus=2  "하단 상태바출력(0: 표시X, 1: 창이 두개 이상일때 표시, 2: 항상표시)
+set statusline+=%{&fileencoding}
+set hlsearch      "검색문자 하이라이트 처리
+set ic            "대소문자 무시
+set scs           "대문자로 입력하면 대문자 검색
+set showmatch     "매칭되는 괄호보이기
+set nowrap        "자동줄바꿈X
+set nowrapscan    "파일끝에 도달하면 찾지않음
+set ruler         "커서 위치 정보 표시
+"set noeol         "파일 맨 끝의(EOL) 개행문자 제거하기
+set bs=indent,eol,start  "indent : 오토 인덴트를 지울 수 있다. 가령 인덴팅에 4개의 스페이스를 사용하고 있다면, 백 스페이스를 한 번 눌러서 인덴팅의 스페이스 4개를 지울 수 있다.
+                         "eol : end of line을 지워서, 두 줄을 하나로 합칠 수 있다.
+                         "start : 행의 시작 지점을 지울 수 있다.
+                         "eol과 start를 함께 설정하면 백 스페이스로 이번 줄을 다 지우고 나서, 더 누르면 바로 윗줄 제일 오른쪽 글자부터 지우기 시작한다.
+
+if has('mouse')
+	set mouse=a
+endif
+
+nnoremap j gj
+nnoremap k gk
+nmap <2-LeftMouse> *#
+nmap <F5> :PlugInstall<CR>
+nmap <F6> :VimGameCodeBreak<CR>
+nmap <F10> ma:%!git blame %<CR>`a
+map <F11> :<C-u>call CopyWord()<CR> :vnew <C-r>".diff \| .!git show <C-r>"<CR>
+vmap <C-J> :norm i//<CR>   "블럭잡힌 각 라인에 // 주석추가
+vmap <C-K> :norm 0xx<CR>
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+"match ExtraWhitespace /\s\+$/
+"autocmd Filetype diff setlocal enc=utf-8
+
+func CopyWord()
+        let column = getline('.')[col('.')]
+        if column == "\0" "if next col is null
+                normal vBy
+        elseif match(column, '\s') == 0 "if next col is empty
+                normal vBy
+        endif
+        normal evBy
+endfunc
+
+" Specify a directory for plugins
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+let curl_exists=expand('curl')
+if !filereadable(vimplug_exists)
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+
+  autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin('~/.vim/autoload')
+Plug 'johngrib/vim-game-code-break'
+call plug#end()
