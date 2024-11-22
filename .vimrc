@@ -11,9 +11,11 @@ color inkpot
 "color slate
 
 "encoding
-set enc=utf-8
-set fenc=utf-8
 set fencs=ucs-bom,utf-8,cp949,euc-kr,latin1
+"set fenc=utf-8
+"set enc=utf-8
+
+set fileformats=unix
 
 "ctags, cscope
 "set tags=./,../
@@ -42,6 +44,7 @@ set si
 "set cindent
 set nostartofline   "밑줄로 이동할 때 커서가 가장 왼쪽의 시작점으로 이동하지 못하게 한다
 set laststatus=2    "하단 상태바출력(0: 표시X, 1: 창이 두개 이상일때 표시, 2: 항상표시)
+set statusline+=%{&fileencoding}
 set hlsearch
 "set incsearch      "찾는글자칠때마다 찾은글자표시
 set ic              "대소문자 무시
