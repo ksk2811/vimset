@@ -68,7 +68,7 @@ nnoremap k gk
 nmap <F5> :PlugInstall<CR>
 nmap <F6> :VimGameCodeBreak<CR>
 nmap <F10> ma:%!git blame %<CR>`a
-map <F11> :<C-u>call CopyWord()<CR> :vnew <C-r>".diff \| .!git show <C-r>"<CR>
+map <F11> :<C-u>call CopyHash()<CR> :vnew <C-r>".diff \| %!git show <C-r>"<CR>
 "vmap <C-J> :norm i//<CR>   "블럭잡힌 각 라인에 // 주석추가
 "vmap <C-K> :norm 0xx<CR>
 
@@ -76,6 +76,12 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/  "라인 마지막 공백 붉은색 표시
 
 nmap <2-LeftMouse> *#  "highlight DoubleClick
+
+function! CopyHash()
+    let l:line = getline('.')
+    let l:word = split(l:line)[0]
+    let @" = l:word
+endfunction
 
 func CopyWord()
         let column = getline('.')[col('.')]
