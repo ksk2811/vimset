@@ -44,7 +44,8 @@ set si
 "set cindent
 set nostartofline   "밑줄로 이동할 때 커서가 가장 왼쪽의 시작점으로 이동하지 못하게 한다
 set laststatus=2    "하단 상태바출력(0: 표시X, 1: 창이 두개 이상일때 표시, 2: 항상표시)
-set statusline+=%{&fileencoding}
+"set statusline+=%{&fileencoding}
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ Encoding:\ %{&fileencoding}\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 set hlsearch
 "set incsearch      "찾는글자칠때마다 찾은글자표시
 set ic              "대소문자 무시
@@ -92,6 +93,13 @@ func CopyWord()
         endif
         normal evBy 
 endfunc
+
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
 
 " Specify a directory for plugins
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
