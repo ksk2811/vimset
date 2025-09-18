@@ -6,10 +6,9 @@ color slate
 let &t_SI = "\<ESC>[6 q"
 let &t_EI = "\<ESC>[2 q"
 
-set fencs=utf-8,euc-kr,Shift-JIS"파일 열때 감지할 인코딩 순서, 바이트가 큰것 부터 지정해야 한다
-"set fencs=euc-kr  "파일 열 때 감지할 인코딩 순서, 바이트가 큰것 부터 지정해야 한다
-"set fenc=utf-8    "파일 열 때 fencs에서 사용된 인코딩이 적용되며 저장될 때 사용, 또는 새 파일 생성시
-"set enc=utf-8     "시스템 혹은 터미널 인코딩 Vim의 메시지, 메뉴, 상태 표시줄, 그리고 클립보드에서 사용되는 인코딩을 결정
+set fencs=utf-8,euc-kr,Shift-JIS  "파일 열때 감지할 인코딩 순서, 바이트가 큰것 부터 지정해야 한다
+"set fenc=utf-8                   "파일 열 때 fencs에서 사용된 인코딩이 적용되며 저장될 때 사용, 또는 새 파일 생성시
+"set enc=utf-8                    "시스템 혹은 터미널 인코딩 Vim의 메시지, 메뉴, 상태 표시줄, 그리고 클립보드에서 사용되는 인코딩을 결정
 
 set fileformats=dos,unix
 
@@ -34,7 +33,7 @@ set ai            "auto
 set si            "smart
 set nostartofline "밑줄로 이동할 때 커서가 가장 왼쪽의 시작점으로 이동하지 못하게 한다
 set laststatus=2  "하단 상태바출력(0: 표시X, 1: 창이 두개 이상일때 표시, 2: 항상표시)
-set statusline+=%{&fileencoding}
+set statusline+=\ %{&fileencoding}\ %{HasPaste()}
 set hlsearch      "검색문자 하이라이트 처리
 set ic            "대소문자 무시
 set scs           "대문자로 입력하면 대문자 검색
@@ -75,6 +74,13 @@ func CopyWord()
         endif
         normal evBy
 endfunc
+
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
 
 " Specify a directory for plugins
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
