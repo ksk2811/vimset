@@ -11,11 +11,11 @@ color inkpot
 "color slate
 
 "encoding
-set fencs=ucs-bom,utf-8,cp949,euc-kr,latin1
-"set fenc=utf-8
-"set enc=utf-8
+set fencs=ucs-bom,utf-8,cp949,euc-kr,latin1 "파일 열때 감지할 인코딩 순서, 바이트가 큰것 부터 지정해야 한다
+"set fenc=utf-8                             "파일 열 때 fencs에서 사용된 인코딩이 적용되며 저장될 때 사용, 또는 새 파일 생성시
+"set enc=utf-8                              "시스템 혹은 터미널 인코딩 Vim의 메시지, 메뉴, 상태 표시줄, 그리고 클립보드에서 사용되는 인코딩을 결정
 
-set fileformats=unix
+set fileformats=unix,dox
 
 "ctags, cscope
 "set tags=./,../
@@ -31,13 +31,13 @@ set nu
 set novisualbell    "경고용 화면 깜빡임 끔
 set nuw=4           "줄 번호 표시 너비 설정
 set wmnu            "탭 완성시 자동완성 목록 보여줌
-set splitbelow
-set splitright
+"set splitbelow      "화면 분할시 상[하] 우선
+set splitright      "화면 분할시 좌[우] 우선   
 set noet
 "set et             "tab 대신 sts에 설정한 값만큼 스페이스 입력
-"set sts=8          "et가 설정되어 있으면 tab 대신 지정한 수의 스페이스 입력
-set ts=8            "직접 탭 입력 시 몇 개의 스페이스로 표시할지 설정. :retab을 입력하면 파일 내의 탭을 tabstop 만큼의 스페이스로 바꿔준다.
-set sw=8            "정렬과 인덴팅시 사용하는 탭을 몇 개의 스페이스로 표시할지 설정
+"set sts=4          "et가 설정되어 있으면 tab 대신 지정한 수의 스페이스 입력
+set ts=4            "직접 탭 입력 시 몇 개의 스페이스로 표시할지 설정. :retab을 입력하면 파일 내의 탭을 tabstop 만큼의 스페이스로 바꿔준다.
+set sw=4            "정렬과 인덴팅시 사용하는 탭을 몇 개의 스페이스로 표시할지 설정
 set smarttab        "sw, ts sts를 참조하여 탭과 백스페이스 키 동작 보조
 set ai
 set si
@@ -54,7 +54,7 @@ set showmatch       "매칭되는 괄호보이기
 "set pt=<Ins>       "인서트키로 paste, nopate 상태전환
 set nowrap          "자동줄바꿈X
 set nowrapscan      "파일끝에 도달하면 찾지않음
-set ruler	    "커서 위치 정보 표시
+set ruler	        "커서 위치 정보 표시
 set ttymouse=xterm2 "마우스스크롤
 set noeol           "파일 맨 끝의(EOL) 개행문자 제거하기
 "set cuc            "커서가 있는 곳을 세로로 하이라이트
