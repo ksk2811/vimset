@@ -73,6 +73,7 @@ nmap <F10> ma:%!git blame %<CR>`a
 map <F11> :<C-u>call CopyHash()<CR> :vnew <C-r>".diff \| %!git show <C-r>"<CR>
 "vmap <C-J> :norm i//<CR>   "블럭잡힌 각 라인에 // 주석추가
 "vmap <C-K> :norm 0xx<CR>
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm  "현재 커서 위치를 보존하면서 문서내 윈도우 개행 제거
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/  "라인 마지막 공백 붉은색 표시
