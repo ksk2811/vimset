@@ -1,4 +1,5 @@
-syntax on
+"syntax on     "문법 강조를 무조건 활성화 (기존 사용자 정의 색상 무시 가능)
+syntax enable  "문법 강조를 활성화하되, 이미 존재하는 사용자 색상 설정은 유지
 filetype on
 
 "mouse
@@ -30,8 +31,8 @@ set nocompatible    "오리지날 VI와 호환하지 않음
 set nu
 set novisualbell    "경고용 화면 깜빡임 끔
 set nuw=4           "줄 번호 표시 너비 설정
-set wmnu            "탭 완성시 자동완성 목록 보여줌
-"set splitbelow      "화면 분할시 상[하] 우선
+set wmnu            "명령줄에 탭 완성시 자동완성 목록 보여줌
+"set splitbelow     "화면 분할시 상[하] 우선
 set splitright      "화면 분할시 좌[우] 우선   
 set noet
 "set et             "tab 대신 sts에 설정한 값만큼 스페이스 입력
@@ -39,8 +40,8 @@ set noet
 set ts=4            "직접 탭 입력 시 몇 개의 스페이스로 표시할지 설정. :retab을 입력하면 파일 내의 탭을 tabstop 만큼의 스페이스로 바꿔준다.
 set sw=4            "정렬과 인덴팅시 사용하는 탭을 몇 개의 스페이스로 표시할지 설정
 set smarttab        "sw, ts sts를 참조하여 탭과 백스페이스 키 동작 보조
-set ai
-set si
+"set ai             "이전 줄의 들여쓰기를 유지
+set si              "이전 줄 들여쓰기에 {, }, # 같은 패턴에 자동으로 한레벨 더 들여쓰기 내어쓰기 맨앞으가 적용
 "set cindent
 set nostartofline   "밑줄로 이동할 때 커서가 가장 왼쪽의 시작점으로 이동하지 못하게 한다
 set laststatus=2    "하단 상태바출력(0: 표시X, 1: 창이 두개 이상일때 표시, 2: 항상표시)
