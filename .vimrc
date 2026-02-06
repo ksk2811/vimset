@@ -71,6 +71,7 @@ nmap <F5> :PlugInstall<CR>
 nmap <F6> :VimGameCodeBreak<CR>
 nmap <F10> ma:%!git blame %<CR>`a
 map <F11> :<C-u>call CopyHash()<CR> :vnew <C-r>".diff \| %!git show <C-r>"<CR>
+nnoremap <leader>g :call GrepCurrentWord()<CR>
 "vmap <C-J> :norm i//<CR>   "블럭잡힌 각 라인에 // 주석추가
 "vmap <C-K> :norm 0xx<CR>
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm  "현재 커서 위치를 보존하면서 문서내 윈도우 개행 제거
@@ -102,6 +103,22 @@ function! HasPaste()
     endif
     return ''
 endfunction
+
+" 현재 단어를 grep -rn으로 검색 후 새 탭에 결과 보기
+function! GrepCurrentWord()
+    " 현재 커서가 위치한 단어 추출
+    let l:word = expand("<cword>")
+
+    " grep 명령 실행 (현재 디렉토리 기준)
+    "let l:cmd = 'grep -rn --include="*.c" --include="*.h" --include="*.cpp" --include="*.py" --include="*.js" --include="*.ts" --include="*.java" --include="*.rb" --include="*.go" --include="*.php" --include="*.sh" "' . l:word . '" .'
+    let l:cmd = 'grep -rn --include="*.c" --include="*.h" --include="*.cpp" --include="*.py" --include="*.js" --include="*.ts" --include="*.java" --include="*.rb" --include="*.go" --include="*.php" --include="*.sh" "' . l:word . '" .'
+
+    " grep 결과를 새 탭에 분할 창으로 열기
+    vnew
+    silent execute 'r !' . l:cmd
+    normal! gg
+endfunction
+
 
 " Specify a directory for plugins
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
