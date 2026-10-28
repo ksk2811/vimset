@@ -37,8 +37,8 @@ set noet
 set ts=4            "직접 탭 입력 시 몇 개의 스페이스로 표시할지 설정. :retab을 입력하면 파일 내의 탭을 tabstop 만큼의 스페이스로 바꿔준다.
 set sw=4            "들여쓰기 한 단계의 폭(칸 수)으로 탭을 몇 칸으로 표시할지 정함.
 set smarttab        "sw, ts sts를 참조하여 탭과 백스페이스 키 동작 보조
-set ai              "이전 줄의 들여쓰기를 유지
-set si              "이전 줄 들여쓰기에 {, }, # 같은 패턴에 자동으로 한레벨 더 들여쓰기 내어쓰기 맨앞으가 적용
+set ai              "autoindent: 새 줄(Enter, o, O)을 윗줄과 같은 들여쓰기로 시작
+set si              "smartindent: ai에 더해 '{'로 끝난 줄 다음과 if/else/while/for 뒤는 한 단계 들여쓰고, '}'로 시작하는 줄은 내어쓰고, '#'로 시작하는 줄은 맨 앞으로 보냄. ai와 함께 켠다
 "set cindent
 set nostartofline   "밑줄로 이동할 때 커서가 가장 왼쪽의 시작점으로 이동하지 못하게 한다
 set laststatus=2    "하단 상태바출력(0: 표시X, 1: 창이 두개 이상일때 표시, 2: 항상표시)
