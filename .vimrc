@@ -12,10 +12,8 @@ color inkpot
 "color slate
 
 "encoding
-set fencs=ucs-bom,utf-8,cp949,euc-kr,latin1 "파일 열때 감지할 인코딩 순서, 바이트가 큰것 부터 지정해야 한다
-"set fenc=utf-8                             "파일 열 때 fencs에서 사용된 인코딩이 적용되며 저장될 때 사용, 또는 새 파일 생성시
-"set enc=utf-8                              "시스템 혹은 터미널 인코딩 Vim의 메시지, 메뉴, 상태 표시줄, 그리고 클립보드에서 사용되는 인코딩을 결정
-
+set enc=utf-8                    "Vim 내부(메모리 버퍼) 인코딩. 읽은 파일은 이 인코딩으로 변환되어 편집되며, 메시지·상태줄·레지스터도 이 인코딩을 쓴다
+set fencs=utf-8,euc-kr,Shift-JIS "파일을 열 때 앞에서부터 시도할 인코딩 후보. 판별이 엄격한(틀리면 실패하는) 인코딩을 앞에 둔다
 set fileformats=unix,dox
 
 "ctags, cscope
@@ -69,17 +67,19 @@ nnoremap j gj
 nnoremap k gk
 nmap <F5> :PlugInstall<CR>
 nmap <F6> :VimGameCodeBreak<CR>
+nmap <F9> :call HexView()<CR>
 nmap <F10> ma:%!git blame %<CR>`a
 map <F11> :<C-u>call CopyHash()<CR> :vnew <C-r>".diff \| %!git show <C-r>"<CR>
 nmap <2-LeftMouse> *#  "highlight DoubleClick  "highlight DoubleClick
 nnoremap <leader>g :call GrepCurrentWord()<CR>
-"vmap <C-J> :norm i//<CR>   "블럭잡힌 각 라인에 // 주석추가
+
+"블럭잡힌 각 라인에 // 주석추가
+"vmap <C-J> :norm i//<CR>   
 "vmap <C-K> :norm 0xx<CR>
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm  "현재 커서 위치를 보존하면서 문서내 윈도우 개행 제거
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/  "라인 마지막 공백 붉은색 표시
-
 
 
 function! CopyHash()
@@ -118,6 +118,26 @@ function! GrepCurrentWord()
     vnew
     silent execute 'r !' . l:cmd
     normal! gg
+endfunction
+
+" 현재 파일을 새창에 16진수로 로딩
+function! HexView()
+    " 현재 버퍼의 내용을 16진수로 변환
+    let l:hex = system('xxd -g 1', join(getline(1, '$'), "\n") . "\n")
+
+    " 새로운 수직 창 생성
+    vertical new
+
+    " Hex Dump 출력
+    call setline(1, split(l:hex, "\n"))
+
+    " 읽기 전용 임시 버퍼 설정
+    setlocal buftype=nofile
+    setlocal bufhidden=wipe
+    setlocal noswapfile
+    setlocal nomodifiable
+    setlocal nowrap
+    setlocal nomodified
 endfunction
 
 
